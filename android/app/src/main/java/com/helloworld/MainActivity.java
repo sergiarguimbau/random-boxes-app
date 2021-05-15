@@ -1,4 +1,4 @@
-package com.helloworld;
+package com.pickrworks.randomboxes;
 
 import com.facebook.react.ReactActivity;
 
