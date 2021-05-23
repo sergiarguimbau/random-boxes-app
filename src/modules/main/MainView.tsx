@@ -5,21 +5,30 @@ import {
   Text,
   StyleSheet,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { BoxNumber, RoundButton } from '../../components'
 
 export type MainProps = {
   children?: React.ReactNode;
-  appCounter?: number,
-  incrementAppCounter?: () => void;
+  randomDigits?: [number, number, number],
+  randomDigitsLog?: Array<[number, number, number]>,
+  generateRandomDigits?: () => void;
 };
 
 const MainView = (props: MainProps) => { 
 
   useEffect(() => {
-    // Increment app counter for every cold app launch (just for testing)
-    props.incrementAppCounter?.();
+    // Generate random digits at startup
+    props.generateRandomDigits?.();
   }, []);
+
+  const showLogPopup = (): void => {
+    // Display system Alert
+    const alertTitle = 'Random Digits Log';
+    const alertMessage = props.randomDigitsLog?.join('\r\n'); // Array item at new line
+    Alert.alert(alertTitle, alertMessage);
+  }
 
   return (
     <SafeAreaView style={styles.appContainer}>
@@ -29,15 +38,15 @@ const MainView = (props: MainProps) => {
           <Text style={styles.titleText}>{'Random Boxes'}</Text>
         </View>
         <View style={styles.boxesContainer}>
-          <BoxNumber number={1} />
-          <BoxNumber number={2} />
-          <BoxNumber number={3} />
+          <BoxNumber number={props.randomDigits?.[0]} />
+          <BoxNumber number={props.randomDigits?.[1]} />
+          <BoxNumber number={props.randomDigits?.[2]} />
         </View>
         <View style={styles.buttonGenerateContainer}>
-          <RoundButton title={'Generate'} />
+          <RoundButton title={'Generate'} onPress={() => props.generateRandomDigits?.()} />
         </View>
         <View style={styles.buttonLogContainer}>
-          <RoundButton title={'Show Log'} />
+          <RoundButton title={'Show Log'} onPress={() => showLogPopup()} />
         </View>
       </View>
     </SafeAreaView>
