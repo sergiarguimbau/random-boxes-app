@@ -8,6 +8,7 @@ export default compose(
   connect(
     (state: {main: MainState}) => ({
       randomDigits: state.main.randomDigits,
+      randomDigitsLog: state.main.randomDigitsLog,
     }),
     dispatch => ({
       generateRandomDigits: () => dispatch(generateRandomDigits()),

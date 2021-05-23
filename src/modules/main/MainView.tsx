@@ -5,12 +5,14 @@ import {
   Text,
   StyleSheet,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { BoxNumber, RoundButton } from '../../components'
 
 export type MainProps = {
   children?: React.ReactNode;
   randomDigits?: [number, number, number],
+  randomDigitsLog?: Array<[number, number, number]>,
   generateRandomDigits?: () => void;
 };
 
@@ -20,6 +22,13 @@ const MainView = (props: MainProps) => {
     // Generate random digits at startup
     props.generateRandomDigits?.();
   }, []);
+
+  const showLogPopup = (): void => {
+    // Display system Alert
+    const alertTitle = 'Random Digits Log';
+    const alertMessage = props.randomDigitsLog?.join('\r\n'); // Array item at new line
+    Alert.alert(alertTitle, alertMessage);
+  }
 
   return (
     <SafeAreaView style={styles.appContainer}>
@@ -37,7 +46,7 @@ const MainView = (props: MainProps) => {
           <RoundButton title={'Generate'} onPress={() => props.generateRandomDigits?.()} />
         </View>
         <View style={styles.buttonLogContainer}>
-          <RoundButton title={'Show Log'} />
+          <RoundButton title={'Show Log'} onPress={() => showLogPopup()} />
         </View>
       </View>
     </SafeAreaView>

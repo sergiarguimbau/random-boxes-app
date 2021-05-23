@@ -3,10 +3,12 @@ import { AnyAction } from 'redux'
 // Initial state
 export type MainState = {
   readonly randomDigits: [number, number, number]; // tuple
+  readonly randomDigitsLog: Array<[number, number, number]> // array of tuples
 };
 
 const initialState: MainState = {
   randomDigits: [NaN, NaN, NaN],
+  randomDigitsLog: [],
 };
 
 // Actions
@@ -36,6 +38,7 @@ export default function MainReducer(state: MainState = initialState, action: Any
     case GENERATE_RANDOM_DIGITS:
       return Object.assign({}, state, {
         randomDigits: action.payload,
+        randomDigitsLog: [action.payload, ...state.randomDigitsLog],
       });
     default:
       return state;
