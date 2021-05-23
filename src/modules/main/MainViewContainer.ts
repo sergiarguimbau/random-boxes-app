@@ -2,15 +2,15 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
 import MainView from './MainView';
-import { MainState, incrementAppCounter } from './MainState'
+import { MainState, generateRandomDigits } from './MainState'
 
 export default compose(
   connect(
     (state: {main: MainState}) => ({
-      appCounter: state.main.appCounter,
+      randomDigits: state.main.randomDigits,
     }),
     dispatch => ({
-      incrementAppCounter: () => dispatch(incrementAppCounter()),
+      generateRandomDigits: () => dispatch(generateRandomDigits()),
     }),
   ),
 )(MainView);

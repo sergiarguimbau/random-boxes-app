@@ -2,29 +2,40 @@ import { AnyAction } from 'redux'
 
 // Initial state
 export type MainState = {
-  readonly appCounter: number;
+  readonly randomDigits: [number, number, number]; // tuple
 };
 
 const initialState: MainState = {
-  appCounter: 0,
+  randomDigits: [NaN, NaN, NaN],
 };
 
 // Actions
-const INCREMENT_APP_COUNTER = 'MainState/INCREMENT_APP_COUNTER';
+const GENERATE_RANDOM_DIGITS = 'MainState/GENERATE_RANDOM_DIGITS';
 
 // Action creators
-export function incrementAppCounter(): AnyAction {
+export function generateRandomDigits(): AnyAction {
+  // New tuple random digits
+  const randomDigits = [getRandomDigit(), getRandomDigit(), getRandomDigit()];
   return {
-      type: INCREMENT_APP_COUNTER,
+      type: GENERATE_RANDOM_DIGITS,
+      payload: randomDigits,
   };
+}
+
+// Helper functions
+// Returns random number between 0 - 9
+function getRandomDigit(): number {
+  const MAX = 10;
+  const randomDigit = Math.floor(Math.random() * MAX); // between {0, MAX-1}
+  return randomDigit;
 }
 
 // Reducer
 export default function MainReducer(state: MainState = initialState, action: AnyAction) {
   switch (action.type) {
-    case INCREMENT_APP_COUNTER:
+    case GENERATE_RANDOM_DIGITS:
       return Object.assign({}, state, {
-        appCounter: state.appCounter + 1,
+        randomDigits: action.payload,
       });
     default:
       return state;
