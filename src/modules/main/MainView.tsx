@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
+import { BoxNumber } from '../../components'
 
 export type MainProps = {
   children?: React.ReactNode;
@@ -24,7 +25,14 @@ const MainView = (props: MainProps) => {
     <SafeAreaView style={styles.appContainer}>
       <StatusBar barStyle='dark-content' />
       <View style={styles.screenContainer}>
-        <Text>{'App Count: ' + props.appCounter}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>{'Random Boxes'}</Text>
+        </View>
+        <View style={styles.boxesContainer}>
+          <BoxNumber number={1} />
+          <BoxNumber number={2} />
+          <BoxNumber number={3} />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -39,6 +47,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     flex: 1,
     padding: 16,
+  },
+  titleContainer: {
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  titleText: {
+    color: '#000000',
+    fontWeight: 'bold',
+    fontSize: 28,
+  },
+  boxesContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   }
 });
 
