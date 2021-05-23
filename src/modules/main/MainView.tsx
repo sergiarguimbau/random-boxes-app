@@ -6,7 +6,7 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import { BoxNumber } from '../../components'
+import { BoxNumber, RoundButton } from '../../components'
 
 export type MainProps = {
   children?: React.ReactNode;
@@ -32,6 +32,12 @@ const MainView = (props: MainProps) => {
           <BoxNumber number={1} />
           <BoxNumber number={2} />
           <BoxNumber number={3} />
+        </View>
+        <View style={styles.buttonGenerateContainer}>
+          <RoundButton title={'Generate'} />
+        </View>
+        <View style={styles.buttonLogContainer}>
+          <RoundButton title={'Show Log'} />
         </View>
       </View>
     </SafeAreaView>
@@ -60,6 +66,15 @@ const styles = StyleSheet.create({
   boxesContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  buttonGenerateContainer: {
+    marginTop: 24,
+    marginHorizontal: 16,
+  },
+  buttonLogContainer: {
+    flex: 1,
+    marginHorizontal: 16,
+    justifyContent: 'flex-end',
   }
 });
 
